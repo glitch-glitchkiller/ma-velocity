@@ -27,6 +27,24 @@ const transitionVariants = {
     },
 }
 
+const menuItems = [
+    { name: 'Platform', href: '#' },
+    { name: 'Solutions', href: '#' },
+    { name: 'Experience', href: '/experience' },
+    { name: 'About', href: '#' },
+]
+
+const clientLogos = [
+    { name: 'Goldman Sachs', icon: BarChart3 },
+    { name: 'JP Morgan', icon: TrendingUp },
+    { name: 'McKinsey', icon: Globe },
+    { name: 'Bain', icon: Layers },
+    { name: 'Deloitte', icon: Shield },
+    { name: 'KKR', icon: Zap },
+    { name: 'Blackstone', icon: BarChart3 },
+    { name: 'Lazard', icon: TrendingUp },
+]
+
 export function HeroSection() {
     return (
         <>
@@ -51,15 +69,12 @@ export function HeroSection() {
                                     },
                                 },
                                 item: {
-                                    hidden: {
-                                        opacity: 0,
-                                        y: 20,
-                                    },
+                                    hidden: { opacity: 0, y: 20 },
                                     visible: {
                                         opacity: 1,
                                         y: 0,
                                         transition: {
-                                            type: 'spring',
+                                            type: 'spring' as const,
                                             bounce: 0.3,
                                             duration: 2,
                                         },
@@ -80,7 +95,7 @@ export function HeroSection() {
                             <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
                                 <AnimatedGroup variants={transitionVariants}>
                                     <Link
-                                        href="#"
+                                        href="/experience"
                                         className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-black/5 transition-all duration-300 dark:border-t-white/5 dark:shadow-zinc-950">
                                         <span className="text-foreground text-sm">Powered by AI-Driven Deal Intelligence</span>
                                         <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700"></span>
@@ -120,9 +135,7 @@ export function HeroSection() {
                                         ...transitionVariants,
                                     }}
                                     className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row">
-                                    <div
-                                        key={1}
-                                        className="bg-foreground/10 rounded-[14px] border p-0.5">
+                                    <div className="bg-foreground/10 rounded-[14px] border p-0.5">
                                         <Button
                                             asChild
                                             size="lg"
@@ -133,7 +146,6 @@ export function HeroSection() {
                                         </Button>
                                     </div>
                                     <Button
-                                        key={2}
                                         asChild
                                         size="lg"
                                         variant="ghost"
@@ -173,62 +185,20 @@ export function HeroSection() {
                 <section className="bg-background pb-16 pt-16 md:pb-32">
                     <div className="group relative m-auto max-w-5xl px-6">
                         <div className="absolute inset-0 z-10 flex scale-95 items-center justify-center opacity-0 duration-500 group-hover:scale-100 group-hover:opacity-100">
-                            <Link
-                                href="/"
-                                className="block text-sm duration-150 hover:opacity-75">
+                            <span className="block text-sm">
                                 <span>Trusted by Leading Firms</span>
                                 <ChevronRight className="ml-1 inline-block size-3" />
-                            </Link>
+                            </span>
                         </div>
                         <div className="group-hover:blur-xs mx-auto mt-12 grid max-w-3xl grid-cols-4 gap-x-12 gap-y-8 transition-all duration-500 group-hover:opacity-50 sm:gap-x-16 sm:gap-y-14">
-                            <div className="flex items-center justify-center">
-                                <div className="flex items-center gap-2 text-muted-foreground/60 dark:text-muted-foreground/40">
-                                    <BarChart3 className="size-5" />
-                                    <span className="text-sm font-semibold tracking-wide">Goldman Sachs</span>
+                            {clientLogos.map(({ name, icon: Icon }) => (
+                                <div key={name} className="flex items-center justify-center">
+                                    <div className="flex items-center gap-2 text-muted-foreground/60 dark:text-muted-foreground/40">
+                                        <Icon className="size-5" />
+                                        <span className="text-sm font-semibold tracking-wide">{name}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="flex items-center justify-center">
-                                <div className="flex items-center gap-2 text-muted-foreground/60 dark:text-muted-foreground/40">
-                                    <TrendingUp className="size-5" />
-                                    <span className="text-sm font-semibold tracking-wide">JP Morgan</span>
-                                </div>
-                            </div>
-                            <div className="flex items-center justify-center">
-                                <div className="flex items-center gap-2 text-muted-foreground/60 dark:text-muted-foreground/40">
-                                    <Globe className="size-5" />
-                                    <span className="text-sm font-semibold tracking-wide">McKinsey</span>
-                                </div>
-                            </div>
-                            <div className="flex items-center justify-center">
-                                <div className="flex items-center gap-2 text-muted-foreground/60 dark:text-muted-foreground/40">
-                                    <Layers className="size-5" />
-                                    <span className="text-sm font-semibold tracking-wide">Bain</span>
-                                </div>
-                            </div>
-                            <div className="flex items-center justify-center">
-                                <div className="flex items-center gap-2 text-muted-foreground/60 dark:text-muted-foreground/40">
-                                    <Shield className="size-5" />
-                                    <span className="text-sm font-semibold tracking-wide">Deloitte</span>
-                                </div>
-                            </div>
-                            <div className="flex items-center justify-center">
-                                <div className="flex items-center gap-2 text-muted-foreground/60 dark:text-muted-foreground/40">
-                                    <Zap className="size-5" />
-                                    <span className="text-sm font-semibold tracking-wide">KKR</span>
-                                </div>
-                            </div>
-                            <div className="flex items-center justify-center">
-                                <div className="flex items-center gap-2 text-muted-foreground/60 dark:text-muted-foreground/40">
-                                    <BarChart3 className="size-5" />
-                                    <span className="text-sm font-semibold tracking-wide">Blackstone</span>
-                                </div>
-                            </div>
-                            <div className="flex items-center justify-center">
-                                <div className="flex items-center gap-2 text-muted-foreground/60 dark:text-muted-foreground/40">
-                                    <TrendingUp className="size-5" />
-                                    <span className="text-sm font-semibold tracking-wide">Lazard</span>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
                 </section>
@@ -237,11 +207,23 @@ export function HeroSection() {
     )
 }
 
+const dealProjects = ['Project Atlas', 'Project Mercury', 'Project Nova']
+const chartData = [40, 55, 45, 65, 50, 70, 60, 80, 75, 85, 70, 90, 82, 95, 88]
+const stats = [
+    { label: 'Documents Analyzed', value: '2,847', color: 'text-[#E8732A]' },
+    { label: 'Risk Flags', value: '12', color: 'text-red-400' },
+    { label: 'Time Saved', value: '340hrs', color: 'text-emerald-400' },
+]
+const insights = [
+    'Revenue synergy potential identified in 3 markets',
+    'Regulatory risk flagged in EU operations',
+    'Integration timeline optimized to 14 months',
+]
+
 function DashboardMockup() {
     return (
         <div className="bg-background aspect-[15/8] relative rounded-2xl border overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black">
-                {/* Top bar */}
                 <div className="flex items-center justify-between border-b border-white/5 px-6 py-3">
                     <div className="flex items-center gap-3">
                         <div className="size-3 rounded-full bg-[#D04A02]" />
@@ -252,13 +234,11 @@ function DashboardMockup() {
                         <div className="h-6 w-16 rounded-md bg-[#D04A02]/20 border border-[#D04A02]/30" />
                     </div>
                 </div>
-                {/* Dashboard content */}
                 <div className="grid grid-cols-12 gap-4 p-6">
-                    {/* Sidebar */}
                     <div className="col-span-3 space-y-3">
                         <div className="rounded-xl bg-white/[0.03] border border-white/5 p-4 space-y-3">
                             <div className="text-[10px] text-white/30 uppercase tracking-wider font-medium">Active Deals</div>
-                            {['Project Atlas', 'Project Mercury', 'Project Nova'].map((name, i) => (
+                            {dealProjects.map((name, i) => (
                                 <div key={name} className={cn(
                                     "flex items-center gap-2 rounded-lg p-2 text-xs",
                                     i === 0 ? "bg-[#D04A02]/10 text-[#E8732A]" : "text-white/40"
@@ -276,26 +256,20 @@ function DashboardMockup() {
                             <div className="text-[10px] text-white/40">72% Complete</div>
                         </div>
                     </div>
-                    {/* Main area */}
                     <div className="col-span-6 space-y-4">
                         <div className="rounded-xl bg-white/[0.03] border border-white/5 p-4">
                             <div className="flex items-center justify-between mb-4">
                                 <div className="text-[10px] text-white/30 uppercase tracking-wider font-medium">Deal Velocity Score</div>
                                 <div className="text-lg font-bold text-[#FFB600]">94.2</div>
                             </div>
-                            {/* Chart mockup */}
                             <div className="flex items-end gap-1 h-24">
-                                {[40, 55, 45, 65, 50, 70, 60, 80, 75, 85, 70, 90, 82, 95, 88].map((h, i) => (
+                                {chartData.map((h, i) => (
                                     <div key={i} className="flex-1 rounded-t-sm bg-gradient-to-t from-[#D04A02]/60 to-[#FFB600]/40" style={{ height: `${h}%` }} />
                                 ))}
                             </div>
                         </div>
                         <div className="grid grid-cols-3 gap-3">
-                            {[
-                                { label: 'Documents Analyzed', value: '2,847', color: 'text-[#E8732A]' },
-                                { label: 'Risk Flags', value: '12', color: 'text-red-400' },
-                                { label: 'Time Saved', value: '340hrs', color: 'text-emerald-400' },
-                            ].map((stat) => (
+                            {stats.map((stat) => (
                                 <div key={stat.label} className="rounded-xl bg-white/[0.03] border border-white/5 p-3">
                                     <div className="text-[10px] text-white/30 mb-1">{stat.label}</div>
                                     <div className={cn("text-sm font-bold", stat.color)}>{stat.value}</div>
@@ -303,15 +277,10 @@ function DashboardMockup() {
                             ))}
                         </div>
                     </div>
-                    {/* Right panel */}
                     <div className="col-span-3 space-y-3">
                         <div className="rounded-xl bg-white/[0.03] border border-white/5 p-4 space-y-3">
                             <div className="text-[10px] text-white/30 uppercase tracking-wider font-medium">AI Insights</div>
-                            {[
-                                'Revenue synergy potential identified in 3 markets',
-                                'Regulatory risk flagged in EU operations',
-                                'Integration timeline optimized to 14 months',
-                            ].map((insight, i) => (
+                            {insights.map((insight, i) => (
                                 <div key={i} className="text-[10px] text-white/40 leading-relaxed border-l-2 border-[#D04A02]/30 pl-2">
                                     {insight}
                                 </div>
@@ -329,24 +298,16 @@ function DashboardMockup() {
     )
 }
 
-const menuItems = [
-    { name: 'Platform', href: '#' },
-    { name: 'Solutions', href: '#' },
-    { name: 'Pricing', href: '#' },
-    { name: 'About', href: '#' },
-]
-
 const HeroHeader = () => {
     const [menuState, setMenuState] = React.useState(false)
     const [isScrolled, setIsScrolled] = React.useState(false)
 
     React.useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50)
-        }
+        const handleScroll = () => setIsScrolled(window.scrollY > 50)
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
+
     return (
         <header>
             <nav
@@ -355,16 +316,12 @@ const HeroHeader = () => {
                 <div className={cn('mx-auto mt-2 max-w-6xl px-6 transition-all duration-300 lg:px-12', isScrolled && 'bg-background/50 max-w-4xl rounded-2xl border backdrop-blur-lg lg:px-5')}>
                     <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
                         <div className="flex w-full justify-between lg:w-auto">
-                            <Link
-                                href="/"
-                                aria-label="home"
-                                className="flex items-center space-x-2">
+                            <Link href="/" aria-label="home" className="flex items-center space-x-2">
                                 <PwCLogo />
                             </Link>
-
                             <button
                                 onClick={() => setMenuState(!menuState)}
-                                aria-label={menuState == true ? 'Close Menu' : 'Open Menu'}
+                                aria-label={menuState ? 'Close Menu' : 'Open Menu'}
                                 className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden">
                                 <Menu className="in-data-[state=active]:rotate-180 group-data-[state=active]:scale-0 group-data-[state=active]:opacity-0 m-auto size-6 duration-200" />
                                 <X className="group-data-[state=active]:rotate-0 group-data-[state=active]:scale-100 group-data-[state=active]:opacity-100 absolute inset-0 m-auto size-6 -rotate-180 scale-0 opacity-0 duration-200" />
@@ -373,11 +330,9 @@ const HeroHeader = () => {
 
                         <div className="absolute inset-0 m-auto hidden size-fit lg:block">
                             <ul className="flex gap-8 text-sm">
-                                {menuItems.map((item, index) => (
-                                    <li key={index}>
-                                        <Link
-                                            href={item.href}
-                                            className="text-muted-foreground hover:text-accent-foreground block duration-150">
+                                {menuItems.map((item) => (
+                                    <li key={item.name}>
+                                        <Link href={item.href} className="text-muted-foreground hover:text-accent-foreground block duration-150">
                                             <span>{item.name}</span>
                                         </Link>
                                     </li>
@@ -388,11 +343,9 @@ const HeroHeader = () => {
                         <div className="bg-background group-data-[state=active]:block lg:group-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
                             <div className="lg:hidden">
                                 <ul className="space-y-6 text-base">
-                                    {menuItems.map((item, index) => (
-                                        <li key={index}>
-                                            <Link
-                                                href={item.href}
-                                                className="text-muted-foreground hover:text-accent-foreground block duration-150">
+                                    {menuItems.map((item) => (
+                                        <li key={item.name}>
+                                            <Link href={item.href} className="text-muted-foreground hover:text-accent-foreground block duration-150">
                                                 <span>{item.name}</span>
                                             </Link>
                                         </li>
@@ -412,15 +365,10 @@ const HeroHeader = () => {
                                 <Button
                                     asChild
                                     size="sm"
-                                    className={cn('bg-[#D04A02] hover:bg-[#B83E02] text-white', isScrolled && 'lg:hidden')}>
-                                    <Link href="#">
-                                        <span>Get Started</span>
-                                    </Link>
-                                </Button>
-                                <Button
-                                    asChild
-                                    size="sm"
-                                    className={cn('bg-[#D04A02] hover:bg-[#B83E02] text-white', isScrolled ? 'lg:inline-flex' : 'hidden')}>
+                                    className={cn(
+                                        'bg-[#D04A02] hover:bg-[#B83E02] text-white',
+                                        isScrolled ? 'lg:inline-flex' : ''
+                                    )}>
                                     <Link href="#">
                                         <span>Get Started</span>
                                     </Link>
@@ -434,16 +382,14 @@ const HeroHeader = () => {
     )
 }
 
-const PwCLogo = () => {
-    return (
-        <div className="flex items-center gap-2">
-            <div className="relative flex items-center justify-center size-8 rounded-lg bg-gradient-to-br from-[#D04A02] to-[#FFB600]">
-                <Zap className="size-4 text-white" />
-            </div>
-            <div className="flex flex-col leading-none">
-                <span className="text-sm font-bold tracking-tight">M&A Velocity</span>
-                <span className="text-[10px] text-muted-foreground tracking-wider uppercase">by PwC</span>
-            </div>
+const PwCLogo = () => (
+    <div className="flex items-center gap-2">
+        <div className="relative flex items-center justify-center size-8 rounded-lg bg-gradient-to-br from-[#D04A02] to-[#FFB600]">
+            <Zap className="size-4 text-white" />
         </div>
-    )
-}
+        <div className="flex flex-col leading-none">
+            <span className="text-sm font-bold tracking-tight">M&A Velocity</span>
+            <span className="text-[10px] text-muted-foreground tracking-wider uppercase">by PwC</span>
+        </div>
+    </div>
+)

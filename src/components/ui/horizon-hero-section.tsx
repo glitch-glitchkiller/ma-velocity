@@ -3,12 +3,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface ThreeRefs {
   scene: THREE.Scene | null;
@@ -36,7 +33,7 @@ export const Component = () => {
   const smoothCameraPos = useRef({ x: 0, y: 30, z: 100 });
 
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [currentSection, setCurrentSection] = useState(1);
+  const [currentSection, setCurrentSection] = useState(0);
   const [isReady, setIsReady] = useState(false);
   const totalSections = 2;
 
@@ -95,7 +92,14 @@ export const Component = () => {
       createNebula();
       createMountains();
       createAtmosphere();
-      getLocation();
+
+      // Store initial mountain z positions for scroll reset
+      const locations: number[] = [];
+      refs.mountains.forEach((mountain, i) => {
+        locations[i] = mountain.position.z;
+      });
+      refs.locations = locations;
+
       animate();
       setIsReady(true);
     };
@@ -393,15 +397,6 @@ export const Component = () => {
       if (refs.renderer) refs.renderer.dispose();
     };
   }, []);
-
-  const getLocation = () => {
-    const refs = threeRefs.current;
-    const locations: number[] = [];
-    refs.mountains.forEach((mountain, i) => {
-      locations[i] = mountain.position.z;
-    });
-    refs.locations = locations;
-  };
 
   useEffect(() => {
     if (!isReady) return;
